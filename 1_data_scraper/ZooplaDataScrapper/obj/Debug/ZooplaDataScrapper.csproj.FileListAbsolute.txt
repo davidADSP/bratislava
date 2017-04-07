@@ -1,0 +1,8 @@
+c:\users\goran.milosevic\documents\visual studio 2015\Projects\ZooplaDataScrapper\ZooplaDataScrapper\bin\Debug\ZooplaDataScrapper.exe.config
+c:\users\goran.milosevic\documents\visual studio 2015\Projects\ZooplaDataScrapper\ZooplaDataScrapper\bin\Debug\ZooplaDataScrapper.exe
+c:\users\goran.milosevic\documents\visual studio 2015\Projects\ZooplaDataScrapper\ZooplaDataScrapper\bin\Debug\ZooplaDataScrapper.pdb
+c:\users\goran.milosevic\documents\visual studio 2015\Projects\ZooplaDataScrapper\ZooplaDataScrapper\obj\Debug\ZooplaDataScrapper.csprojResolveAssemblyReference.cache
+c:\users\goran.milosevic\documents\visual studio 2015\Projects\ZooplaDataScrapper\ZooplaDataScrapper\obj\Debug\ZooplaDataScrapper.exe
+c:\users\goran.milosevic\documents\visual studio 2015\Projects\ZooplaDataScrapper\ZooplaDataScrapper\obj\Debug\ZooplaDataScrapper.pdb
+c:\users\goran.milosevic\documents\visual studio 2015\Projects\ZooplaDataScrapper\ZooplaDataScrapper\bin\Debug\Newtonsoft.Json.dll
+c:\users\goran.milosevic\documents\visual studio 2015\Projects\ZooplaDataScrapper\ZooplaDataScrapper\bin\Debug\Newtonsoft.Json.xml
