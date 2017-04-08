@@ -189,7 +189,7 @@ write_csv(y_valid,path='data/y_valid.csv')
 
 
 
-doWords(NULL)
+m = doWords(NULL)
 
 
 m_train = m[train_rows,]
