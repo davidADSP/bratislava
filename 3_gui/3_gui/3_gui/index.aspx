@@ -3,7 +3,7 @@
 <script runat="server">
     public void Page_Load(object sender, EventArgs e)
     {
-        if (Request.HttpMethod=="POST")
+        if (Request.HttpMethod == "POST")
         {
             string response = "";
             string queryMethod = Request.QueryString["method"];
@@ -62,6 +62,7 @@
                 });
 
                 RfacadeTool.RFacade rf = new RfacadeTool.RFacade();
+                rf.ClearCache();
                 response = rf.MakeRRequest(queryMethod, prms);
             }
             Response.Clear();
@@ -134,6 +135,45 @@
         .option_placeholder {
             color: #808080;
         }
+
+        #offeredPrice {
+            color: #ff0000;
+        }
+
+        #forecastedValue {
+            color: #3498DB;
+        }
+
+        #offeredPrice2 {
+            color: #ff0000;
+        }
+
+        #forecastedValue2 {
+            color: #3498DB;
+        }
+
+        #forecastedValue3 {
+            color: #3498DB;
+        }
+
+        .wtifimg {
+            margin: 6px;
+            opacity: 0.8;
+            border: solid 1px #000000;
+            padding: 3px;
+            cursor: pointer;
+        }
+
+            .wtifimg:hover {
+                margin: 6px;
+                padding: 3px;
+                opacity: 0.8;
+                border: solid 1px #cfcfcf;
+            }
+
+        .optdiv {
+            text-align: left;
+        }
     </style>
 </head>
 
@@ -165,11 +205,11 @@
                         <a class="page-scroll" href="#letustellyou">Let us tell you..</a>
                     </li>
                     <li>
-                        <a class="page-scroll" href="#improve">Improve</a>
+                        <a class="page-scroll" href="#improve">What if?</a>
                     </li>
 
                     <li>
-                        <a class="page-scroll" href="#contactus">Contact</a>
+                        <a class="page-scroll" href="#improvedescription">Contact</a>
                     </li>
                 </ul>
             </div>
@@ -206,8 +246,8 @@
                 <h2>Let us tell you...</h2>
                 <p>Whether you should accept the offer you were given...</p>
                 <p>How the value of you property will look like in next few weeks</p>
-                <p>How to write your property description to get more for what you own.</p>
-                <p>When you are ready...click <a href="#formdata">here</a></p>
+                <p>What to do to increase your property value.</p>
+                <p>When you are ready...let's <a href="#formdata">GO</a></p>
             </div>
         </div>
     </section>
@@ -283,6 +323,99 @@
 
 
 
+    <section id="results" class="container content-section text-center">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2">
+                <h2>You have told us that the offered value for your property is <span id="offeredPrice"></span></h2>
+                <p>Our tool predicted that your property is worth <span id="forecastedValue"></span></p>
+                <p>This makes the decision easy:</p>
+                <div>
+                    <img id="decisionImg" src="" style="height: 35%; width: 35%" />
+                </div>
+                <p>But Wait! Lets see how you can increase your property value! <a href="#improvedescription">GO</a></p>
+            </div>
+        </div>
+    </section>
+
+
+    <section id="improvedescription" class="container content-section text-center">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2">
+                <h2>The What If?</h2>
+                <p>Try playing with options (drag from the right to the left), see for how much you can improve property value by making upgrades like additional garage, modern kitchen, pool, guest room!</p>
+                <p>:)</p>
+                <div class="row">
+
+                    <div class="col-lg-6 optionsDiv optdiv" id="optionsDiv" style="height: 225px;">
+                        <div style="text-align: center">
+                            <p>Options</p>
+                        </div>
+                        <img class="wtifimg" src="img/black-bed.png" title="Master bedroom" />
+                        <img class="wtifimg" src="img/economic-architecture-building-of-stacked-containers.png" title="Open plan" />
+                        <img class="wtifimg" src="img/home-building-like-a-birds-house.png" title="From aspect" />
+                        <img class="wtifimg" src="img/table-and-two-chairs-set-for-back-yard.png" title="Fitted kitchen" />
+                        <img class="wtifimg" src="img/black-bed.png" title="Master bedroom" />
+                        <img class="wtifimg" src="img/electric-plugins-of-wall.png" title="Power points" />
+
+                        <img class="wtifimg" src="img/livingroom-black-curtains.png" title="Central heating" />
+
+                        <img class="wtifimg" src="img/picture-with-frame-for-livingroom-decoration-of-house.png" title="Double glazed" />
+
+                        <img class="wtifimg" src="img/bathtub-with-opened-shower.png" title="Family bathroom" />
+
+                        <img class="wtifimg" src="img/fence.png" title="Rear garden" />
+
+                        <img class="wtifimg" src="img/hotel-receptionist.png" title="Reception room" />
+
+                        <img class="wtifimg" src="img/shower.png" title="Shower room" />
+
+                        <img class="wtifimg" src="img/sword.png" title="Stainless steel" />
+
+                        <img class="wtifimg" src="img/parking-sign.png" title="Street parking" />
+
+                        <img class="wtifimg" src="img/tiles.png" title="Tiled walls" />
+
+                        <img class="wtifimg" src="img/railroad-with-wood-planks.png" title="Transport links" />
+
+                        <img class="wtifimg" src="img/bedroomplusone.png" title="Add another bedroom" />
+
+                        <img class="wtifimg" src="img/bathtubplusone.png" title="Add another bath" />
+
+                    </div>
+                    <div class="col-lg-6 addOnDiv optdiv" id="addOnDiv">
+                        <div style="text-align: center">
+                            <p>Addons</p>
+                        </div>
+
+                    </div>
+
+
+
+                </div>
+
+
+
+
+            </div>
+        </div>
+        <div class="row">
+
+            <div class="col-lg-4 optionsDiv col-lg-offset-2">
+                <p>Forecasted:&nbsp;<span id="forecastedValue2">123423</span></p>
+            </div>
+
+            <div class="col-lg-4 optionsDiv col-lg-offset-1">
+                <p>With addons:&nbsp;<span id="forecastedValue3">123213</span></p>
+            </div>
+
+ 
+
+ 
+        </div>
+                    <p>When you are ready...let's <a href="javascript:reforecast();">GO</a></p>
+    </section>
+
+
     <!-- Contact Section -->
     <section id="contactus" class="container content-section text-center">
         <div class="row">
@@ -331,43 +464,13 @@
 
 
 
-    <div class="container">
-        <h1>Please Wait Modal Example</h1>
-        <p>Click button to run demo..</p>
-        <a href="#myModal" role="button" class="btn btn-primary" data-toggle="modal">Submit</a>
-    </div>
-
-
-    <!-- Modal -->
-    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                    <h4 class="modal-title" id="myModalLabel">Please Wait</h4>
-                </div>
-                <div class="modal-body center-block">
-                    <div class="progress">
-                        <div class="progress-bar bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
-                        </div>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                </div>
-            </div>
-            <!-- /.modal-content -->
-        </div>
-        <!-- /.modal-dialog -->
-    </div>
-    <!-- /.modal -->
-
 
     <script>
         function populateSelectBox(method, theId, placeHolderText) {
             if (typeof (placeHolderText) == "undefined" || placeHolderText == null) {
                 placeHolderText = "";
             }
+
             //load property types
             var res = $.ajax({
                 type: "GET",
@@ -393,11 +496,15 @@
             }).trigger("change");
         }
 
-
+        var last_forecasted_object = null;
         $(document).ready(function () {
             //setup search boxes
             $("#streetInput").autocomplete({
                 minLength: 3,
+                select: function (ev, ui) {
+                    $("#streetInput").val(ui.item.label);
+                    return false;
+                },
                 source: function (request, response) {
                     var term = request.term;
                     var parsed = [];
@@ -434,7 +541,7 @@
 
             $("#startCalculationBtn").click(function () {
                 $(".invalidControl").removeClass("invalidControl");
-                postObj = {};;
+                postObj = {};
                 postObj.propertyType = $("#propertyTypeInput").val();
                 postObj.street = $("#streetInput").val();
                 postObj.bedrooms = $("#bedInput").val();
@@ -466,10 +573,71 @@
                     }
                 });
 
+                last_forecasted_object = postObj;
+                var forecastedObj = JSON.parse(res.responseText);
+                var actualPrice = parseFloat(postObj.price);
+                var forecastedPrice = parseFloat(forecastedObj[0].value);
+                if (forecastedPrice < actualPrice * 0.98) {
+                    $("#decisionImg").attr("src", "/img/logo_sell.png");
+                } else {
+                    $("#decisionImg").attr("src", "/img/logo_keep.png");
+                }
+                $("#offeredPrice").text(postObj.price);
+                $("#forecastedValue").text(forecastedObj[0].value);
+                $("#offeredPrice2").text(postObj.price);
+                $("#forecastedValue2").text(forecastedObj[0].value);
+                window.location.href = "#results";
             });
+
+            moveImage = function (ex) {
+                var el = $(ex);
+                var divEl = el.parents("div").first();
+                var newImg = $(el[0].outerHTML)
+                newImg.click(function (ex) { moveImage(this) });
+                el.remove();
+                if (divEl.hasClass("addOnDiv")) {
+                    $("#optionsDiv").append(newImg);
+                } else {
+                    $("#addOnDiv").append(newImg);
+                }
+            }
+
+            $(".wtifimg").click(function () {
+                moveImage(this);
+            });
+
         });
 
+        function reforecast() {
+            if (last_forecasted_object == null) return;
+            var newObj = last_forecasted_object;
+            newObj.bathrooms = parseInt(newObj.bathrooms);
+            newObj.bedrooms = parseInt(newObj.bedrooms);
+            //addon keywords
+            $("#addOnDiv").find(".wtifimg").each(function (i, el) {
+                var tit = $(el).attr("title");
+                if (tit == "Add another bedroom") newObj.bedrooms = newObj.bedrooms + 1;
+                else if (tit == "Add another bath") newObj.bathrooms = newObj.bathrooms + 1;
+                else
+                    newObj.description = newObj.description + " " + tit;
+            });
+            //running model
+            var res = $.ajax({
+                type: "POST",
+                async: false,
+                url: "?method=getpreds",
+                data: newObj,
+                success: function (data) {
+                    return data;
+                }
+            });
 
+            var forecastedObj = JSON.parse(res.responseText);
+            var actualPrice = parseFloat(postObj.price);
+            var forecastedPrice = parseFloat(forecastedObj[0].value);
+            $("#forecastedValue3").text(forecastedPrice);
+            $("#forecastedValue3").fadeIn(300).fadeOut(300).fadeIn(300);
+        }
 
 
 
