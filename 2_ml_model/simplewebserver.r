@@ -68,13 +68,35 @@ getUniqueStreets = function(data){
 getpreds = function(data){
   data = gsub("getpreds;","",data);
   obj =  fromJSON(data);
+  #get outcode
+  street = obj[2,2];
+  #will just get at random stuff related to street
+  vx = dx[dx$street_name == street];
+  vx = vx[sample(1:nrow(dx),1),];
   data_to_predict = data.table(
+    "listing_id" = 0,
+    "agent_name" = "David Conway & Co Ltd",
+    "agent_phone" = "020 3478 3581",
+    "category" = "Residential",
     "description" = obj[7,2],
+    "displayable_address" = obj[2,2],
+    "first_publish_date" = "",
+    "image_url" = "http://image_shack.com",
+    "last_publish_date" = "",
+    "latitude" = vx$latitude,
+    "listing_status"="sale",
+    "longitude" = vx$longitude,
+    "new_home" = "true",
     "num_bathrooms" = obj[4,2],
     "num_beedrooms" = obj[3,2],
     "num_floors" = obj[6,2],
     "num_recepts" = obj[5,2],
+    "outcode" = vx$outcode,
+    "post_town" = vx$post_town,
+    "price" = 0,
+    "price_change" = "",
     "property_type" = obj[1,2],
+    "status" = "for_sale",
     "street_name" = obj[2,2]
   );
   getForecastedPrices(data_to_predict);
