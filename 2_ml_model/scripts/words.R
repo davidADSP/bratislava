@@ -1,3 +1,5 @@
+doWords = function(newrow){
+
 #
 # Beating the Benchmark 
 # Search Results Relevance @ Kaggle
@@ -40,7 +42,7 @@ python.tfidf = function(txt,smooth_idf=T,sublinear_tf=F,
   #corp = tm_map(corp, removeWords, stopwords('english'))
   #corp = tm_map(corp, removeNumbers)
   corp = tm_map(corp, removePunctuation)
-  corp <- tm_map(corp, content_transformer(gsub), pattern = "[0-9]+", replacement = "<number>")
+  #corp <- tm_map(corp, content_transformer(gsub), pattern = "[0-9]+", replacement = "<number>")
   
   
   
@@ -143,14 +145,23 @@ words_data = fread("./data/words_data.csv");
 
 
 
+
+
 # combine query title and description into single character array
 txt = words_data$product_description;
 
+if (!is.null(newrow)){
+  
+  txt = c(txt, newrow)
+  
+}
+
 
 # get document term matrix
-m = python.tfidf(txt,sublinear=T,smooth_idf=T,normf="l2",min_df=5,ngram_range=c(5,5))
+m = python.tfidf(txt,sublinear=T,smooth_idf=T,normf="l2",min_df=20,ngram_range=c(2,2))
 
+return (m)
 
-
+}
 
 

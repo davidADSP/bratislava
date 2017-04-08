@@ -5,6 +5,7 @@ library(caret)
 library(stringr)
 
 source('./scripts/config.R')
+source('./scripts/words.R')
 
 data = fread('./data/data_04_08_2017.csv')
 
@@ -115,6 +116,7 @@ for (f in char_feat) {
     levels[,rank:=rank(-N,ties.method="random")]
     names(levels) = c('V1','N',f)
     
+    
     # 
     # m <- t(sapply(levels[,rank],function(x){ as.integer(intToBits(x))}))
     # cut = min(which(apply(m,2,sum)==0))
@@ -126,6 +128,7 @@ for (f in char_feat) {
     # 
     
     levels[,N:=NULL]
+    save(levels, file=paste0('./level_',f,'.rdata'))
     
     data = merge(data,levels,by.y='V1',by.x=f,sort=FALSE)  
     data[,c(f):=NULL]
@@ -135,6 +138,7 @@ for (f in char_feat) {
     names(col) = f
     dummy = dummyVars( ~ ., data = col)
     data_out = data.table(predict(dummy, newdata = col))
+    save(dummy, file=paste0('./dummy_',f,'.rdata'))
     data = cbind(data,data_out)
     rm(col,dummy,data_out)
     gc()
@@ -184,8 +188,8 @@ write_csv(y_valid,path='data/y_valid.csv')
 #write_csv(months,path='data/adjustments.csv')
 
 
-source('./scripts/words.R')
 
+doWords(NULL)
 
 
 m_train = m[train_rows,]
@@ -203,5 +207,4 @@ m_valid = cbind(Matrix(as.matrix(struct_X_valid)[,2:ncol(struct_X_train)], spars
 writeMM(m_train, file = './data/X_train_words.RData')
 writeMM(m_valid, file = './data/X_valid_words.RData')
 
-col_headings = c(names(struct_X_train)[2:ncol(struct_X_train)], paste0('txt_',m@Dimnames$Terms))
 

@@ -11,6 +11,15 @@ dx = fread("data/data_04_08_2017.csv");
 
 
 
+
+#DAVID here we plug your models
+getForecastedPrices = function(data_to_predict){
+    print(data_to_predict);
+    
+}
+
+
+
 getUniqueCategories = function(){
   categories = unique(dx$category);
 }
@@ -145,10 +154,6 @@ server()
 
 
 
-#DAVID here we plug your models
-getForecastedPrices = function(data_to_predict){
-  print(data_to_predict);
-}
 
 
 
