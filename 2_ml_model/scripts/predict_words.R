@@ -36,21 +36,21 @@ preds = predict(model,data_test)
 #preds = preds + temp[,adj]
 #preds = exp(preds)-1
 
-preds = data.table(id = id_test, response = preds)
-setnames(preds,c(id_col,response_col))
+##setnames(preds,c(id_col,response_col))
+#preds = data.table(id = id_test, response = preds)
 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 
 cat("\n\nWRITING...")
 
 # Writing the prediction to csv
-cat("\nWriting the prediction to csv...")
-write_csv(preds,path='./predictions/predictions.csv')
+#cat("\nWriting the prediction to csv...")
+#write_csv(preds,path='./predictions/predictions.csv')
 
 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 
 cat("\n\nFINISHED...")
 
-plot(y_test,preds[,price],cex=0.2)
+plot(y_test,preds,cex=0.2)
 
