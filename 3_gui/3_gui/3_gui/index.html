@@ -23,6 +23,10 @@
     <!-- Theme CSS -->
     <link href="css/grayscale.min.css" rel="stylesheet">
 
+    <~-- Charts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.js"></script>
+    </script>
+
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -118,6 +122,51 @@
         </div>
     </section>
 
+
+        <!-- Valuation Section -->
+        <section id="valuation" class="container content-section text-center">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2">
+                    <h2>How similar properties sell:</h2>
+                    <canvas id="priceChart" width="400" height="400"></canvas>
+<script>
+var ctx = document.getElementById("priceChart");
+var myChart = new Chart(ctx, {
+    type: 'bubble',
+    data: {
+    datasets: [
+        {
+            label: 'First Dataset',
+            data: [
+                {
+                    x: 0,
+                    y: 10,
+                    r: 10
+                },
+                {
+                    x: 0,
+                    y: 40,
+                    r: 10
+                }
+            ],
+            backgroundColor:"#FF6384",
+            hoverBackgroundColor: "#FF6384",
+        }]
+    },
+    options: {
+        elements: {
+            points: {
+                borderWidth: 1,
+                borderColor: 'rgb(0, 0, 0)'
+            }
+        }
+    }
+
+});
+</script>
+                </div>
+            </div>
+        </section>
 
 
 
