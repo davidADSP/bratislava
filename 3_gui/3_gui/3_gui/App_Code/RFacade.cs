@@ -37,7 +37,7 @@ namespace RfacadeTool
             strToSend += '\r';
             if (cache.ContainsKey(strToSend)) return cache[strToSend];
 
-            IPAddress ipAddress = IPAddress.Parse("10.18.2.37");
+            IPAddress ipAddress = IPAddress.Parse("10.18.0.33");
             IPEndPoint remoteEP = new IPEndPoint(ipAddress, 8089);
             // Create a TCP/IP  socket.  
             Socket sender = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);

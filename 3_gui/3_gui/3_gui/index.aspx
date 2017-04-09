@@ -187,7 +187,7 @@
                     Menu <i class="fa fa-bars"></i>
                 </button>
                 <a class="navbar-brand page-scroll" href="#page-top">
-                    <i class="fa fa-play-circle"></i><span class="light">hometruth</span>
+                    <i class="fa fa-play-circle"></i><span class="light">&nbsp;hometruth</span>
                 </a>
             </div>
 
@@ -205,11 +205,11 @@
                         <a class="page-scroll" href="#letustellyou">Let us tell you..</a>
                     </li>
                     <li>
-                        <a class="page-scroll" href="#improve">What if?</a>
+                        <a class="page-scroll" href="#improvedescription">What if?</a>
                     </li>
 
                     <li>
-                        <a class="page-scroll" href="#improvedescription">Contact</a>
+                        <a class="page-scroll" href="#contactus">Contact</a>
                     </li>
                 </ul>
             </div>
@@ -246,7 +246,7 @@
                 <h2>Let us tell you...</h2>
                 <p>Whether you should accept the offer you were given...</p>
                 <p>How the value of you property will look like in next few weeks</p>
-                <p>What to do to increase your property value.</p>
+                <p>What can you do to increase your property value.</p>
                 <p>When you are ready...let's <a href="#formdata">GO</a></p>
             </div>
         </div>
@@ -330,9 +330,9 @@
                 <p>Our tool predicted that your property is worth <span id="forecastedValue"></span></p>
                 <p>This makes the decision easy:</p>
                 <div>
-                    <img id="decisionImg" src="" style="height: 35%; width: 35%" />
+                    <img id="decisionImg" src="img/logo.png" style="height: 35%; width: 35%" />
                 </div>
-                <p>But Wait! Lets see how you can increase your property value! <a href="#improvedescription">GO</a></p>
+                <p>But wait, there's more! Let's increase your property value (insurance policy covered)! <a href="#improvedescription">GO</a></p>
             </div>
         </div>
     </section>
@@ -342,7 +342,7 @@
         <div class="row">
             <div class="col-lg-8 col-lg-offset-2">
                 <h2>The What If?</h2>
-                <p>Try playing with options (drag from the right to the left), see for how much you can improve property value by making upgrades like additional garage, modern kitchen, pool, guest room!</p>
+                <p>Try playing with options (click on icon to add / remove features) - see how much you can improve your property value by making upgrades.</p>
                 <p>:)</p>
                 <div class="row">
 
@@ -401,18 +401,18 @@
         <div class="row">
 
             <div class="col-lg-4 optionsDiv col-lg-offset-2">
-                <p>Forecasted:&nbsp;<span id="forecastedValue2">123423</span></p>
+                <p>Forecasted:&nbsp;<span id="forecastedValue2">___________</span></p>
             </div>
 
             <div class="col-lg-4 optionsDiv col-lg-offset-1">
-                <p>With addons:&nbsp;<span id="forecastedValue3">123213</span></p>
+                <p>With addons:&nbsp;<span id="forecastedValue3">___________</span></p>
             </div>
 
- 
 
- 
+
+
         </div>
-                    <p>When you are ready...let's <a href="javascript:reforecast();">GO</a></p>
+        <p>When you are ready...let's <a href="javascript:reforecast();">GO</a></p>
     </section>
 
 
@@ -425,17 +425,11 @@
                 <p>
                     <a href="mailto:feedback@startbootstrap.com">fools_and_horses@london.com</a>
                 </p>
-                <ul class="list-inline banner-social-buttons">
-                    <li>
-                        <a href="https://twitter.com/SBootstrap" class="btn btn-default btn-lg"><i class="fa fa-twitter fa-fw"></i><span class="network-name">Twitter</span></a>
-                    </li>
-                    <li>
-                        <a href="https://github.com/IronSummitMedia/startbootstrap" class="btn btn-default btn-lg"><i class="fa fa-github fa-fw"></i><span class="network-name">Github</span></a>
-                    </li>
-                    <li>
-                        <a href="https://plus.google.com/+Startbootstrap/posts" class="btn btn-default btn-lg"><i class="fa fa-google-plus fa-fw"></i><span class="network-name">Google+</span></a>
-                    </li>
-                </ul>
+
+
+                <p>
+                    The code for scraping, data, mining models and gui you can download from <a href="https://github.com/davidADSP/bratislava">https://github.com/davidADSP/bratislava</a>
+                </p>
             </div>
         </div>
     </section>
@@ -447,6 +441,18 @@
             <p>Copyright &copy; www.hometrue.me</p>
         </div>
     </footer>
+
+    <div id="waitingDialog" class="hidden" style="padding: 15px;">
+        <p>Hej, give us a moment of two</p>
+        <div class="progress">
+            <div class="progress-bar progress-bar-success progress-bar-striped active" role="progressbar" aria-valuenow="100"
+                aria-valuemin="0" aria-valuemax="100" style="width: 100%">
+                Crunching those text and numbers!
+            </div>
+        </div>
+    </div>
+
+
     <!-- jQuery -->
     <script src="vendor/jquery/jquery.js"></script>
     <!-- Bootstrap Core JavaScript -->
@@ -470,7 +476,6 @@
             if (typeof (placeHolderText) == "undefined" || placeHolderText == null) {
                 placeHolderText = "";
             }
-
             //load property types
             var res = $.ajax({
                 type: "GET",
@@ -496,8 +501,32 @@
             }).trigger("change");
         }
 
+        var progress_bar_value = 0;
+        var progress_interval = null;
+        function showDialog() {
+            var waitingDialog = $("#waitingDialog").dialog({
+                modal: true,
+                buttons: {},
+                title: 'Loading.....',
+                minHeight: 180,
+                minWidth: 430,
+                resizable: false,
+                closeOnEscape: false,
+            });
+            $("#waitingDialog").find("progress-bar").attr("aria-valuenow", "0");
+            $("#waitingDialog").removeClass("hidden");
+            $(".ui-dialog-titlebar").hide();
+            //run interval function
+        }
+
+        function hideDialog() {
+            clearInterval(progress_interval);
+            $("#waitingDialog").dialog("close");
+        }
+
         var last_forecasted_object = null;
         $(document).ready(function () {
+
             //setup search boxes
             $("#streetInput").autocomplete({
                 minLength: 3,
@@ -561,7 +590,7 @@
                 if (postObj.price == "") $("#givenPriceInput").addClass("invalidControl");
 
                 if ($(".invalidControl").length > 0) return false;
-
+                showDialog();
                 //running model
                 var res = $.ajax({
                     type: "POST",
@@ -569,24 +598,25 @@
                     url: "?method=getpreds",
                     data: postObj,
                     success: function (data) {
-                        return data;
+                        res = data;
+                        last_forecasted_object = postObj;
+                        var forecastedObj = JSON.parse(res);
+                        var actualPrice = parseFloat(postObj.price);
+                        var forecastedPrice = parseFloat(forecastedObj[0].value);
+                        if (forecastedPrice < actualPrice * 0.98) {
+                            $("#decisionImg").attr("src", "/img/logo_sell.png");
+                        } else {
+                            $("#decisionImg").attr("src", "/img/logo_keep.png");
+                        }
+                        $("#offeredPrice").text(postObj.price);
+                        $("#forecastedValue").text(forecastedObj[0].value);
+                        $("#offeredPrice2").text(postObj.price);
+                        $("#forecastedValue2").text(forecastedObj[0].value);
+                        window.location.href = "#results";
                     }
                 });
+                hideDialog();
 
-                last_forecasted_object = postObj;
-                var forecastedObj = JSON.parse(res.responseText);
-                var actualPrice = parseFloat(postObj.price);
-                var forecastedPrice = parseFloat(forecastedObj[0].value);
-                if (forecastedPrice < actualPrice * 0.98) {
-                    $("#decisionImg").attr("src", "/img/logo_sell.png");
-                } else {
-                    $("#decisionImg").attr("src", "/img/logo_keep.png");
-                }
-                $("#offeredPrice").text(postObj.price);
-                $("#forecastedValue").text(forecastedObj[0].value);
-                $("#offeredPrice2").text(postObj.price);
-                $("#forecastedValue2").text(forecastedObj[0].value);
-                window.location.href = "#results";
             });
 
             moveImage = function (ex) {
@@ -610,7 +640,8 @@
 
         function reforecast() {
             if (last_forecasted_object == null) return;
-            var newObj = last_forecasted_object;
+            var newObj = JSON.parse(JSON.stringify(last_forecasted_object));;
+
             newObj.bathrooms = parseInt(newObj.bathrooms);
             newObj.bedrooms = parseInt(newObj.bedrooms);
             //addon keywords
@@ -621,6 +652,8 @@
                 else
                     newObj.description = newObj.description + " " + tit;
             });
+
+            showDialog();
             //running model
             var res = $.ajax({
                 type: "POST",
@@ -631,7 +664,7 @@
                     return data;
                 }
             });
-
+            hideDialog();
             var forecastedObj = JSON.parse(res.responseText);
             var actualPrice = parseFloat(postObj.price);
             var forecastedPrice = parseFloat(forecastedObj[0].value);
@@ -644,7 +677,11 @@
 
 
 
+
+
     </script>
+
+
 </body>
 
 </html>
