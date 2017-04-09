@@ -114,6 +114,8 @@ print(Matrix(as.matrix(data_to_predict), sparse = TRUE))
 print(m[nrow(m),,drop=FALSE])
 
 out = cbind(Matrix(as.matrix(data_to_predict), sparse = TRUE), m[nrow(m),,drop=FALSE])
+print(m@Dimnames$Terms[which(m[nrow(m),,drop=FALSE] > 0)])
+print(rowSums(m[nrow(m),,drop=FALSE]))
 print(out)
 return (out)
 }
