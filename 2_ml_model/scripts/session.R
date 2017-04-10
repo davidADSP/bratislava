@@ -9,9 +9,10 @@ library(data.table)
 library(readr)
 library(caret)
 library(stringr)
+library("Matrix");
 
 source('./scripts/config.R')
-source('./scripts/preprocess_newdata.R')
+source('./scripts/preprocess_newdata_new.R')
 #library("svSocket");
 
 dx = fread("data/data_04_08_2017.csv");
@@ -20,13 +21,13 @@ load('./models/model.RData')
 
 #DAVID here we plug your models
 getForecastedPrices = function(data_to_predict){
-  print(1)
+  #print(1)
   processed_data_to_predict = preProcessNewDataPoint(data_to_predict)
-  print(2)
+  #print(2)
   dummy_test  = xgb.DMatrix(processed_data_to_predict, missing = NA)
-  print(3)
+  #print(3)
   pred = predict(model,dummy_test)
-  print(4)
+  #print(4)
   print(pred);
   return (pred)
 }
@@ -92,7 +93,7 @@ getpreds = function(data){
   street = obj[2,2];
   #will just get at random stuff related to street
   vx = dx[dx$street_name == street];
-  print(street)
+  #print(street)
   vx = vx[1,];
   data_to_predict = data.table(
     "listing_id" = 0,

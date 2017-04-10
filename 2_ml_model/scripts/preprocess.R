@@ -7,10 +7,13 @@ library(stringr)
 source('./scripts/config.R')
 source('./scripts/words.R')
 
+
 data = fread('./data/data_04_08_2017.csv')
 
 data = data[price<1000000]
 data = data[price>0]
+
+data_original = data
 
 words_data = data[,.(id=listing_id, query = '', product_title='', product_description = description, median_relevance = price, relevance_variance = 0)]
 write_csv(words_data,path='data/words_data.csv')
@@ -190,6 +193,18 @@ write_csv(y_valid,path='data/y_valid.csv')
 
 
 m = doWords(NULL)
+
+
+struct_vars = colnames(struct_X_train)[2:ncol(struct_X_train)]
+struct_vars_idx = 1:length(struct_vars)
+desc_vars_no_txt = m@Dimnames$Terms
+desc_vars = paste0('txt_',m@Dimnames$Terms)
+desc_vars_idx = length(struct_vars) + (1:length(desc_vars))
+
+col_headings = c(struct_vars, desc_vars)
+write.csv(col_headings, file = './col_headings.csv')
+
+write.csv(desc_vars_no_txt, file = './desc_vars_no_txt.csv')
 
 
 m_train = m[train_rows,]

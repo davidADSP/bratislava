@@ -89,12 +89,7 @@ cat('Saving the model...')
 save(model,file='./models/model.rdata')
 save(model,file=paste0('./models/model_',sub("\\.","_",score),".rdata"))
 
-struct_vars = colnames(struct_X_train)[2:ncol(struct_X_train)]
-struct_vars_idx = 1:length(struct_vars)
-desc_vars = paste0('txt_',m@Dimnames$Terms)
-desc_vars_idx = length(struct_vars) + (1:length(desc_vars))
 
-col_headings = c(struct_vars, desc_vars)
 
 #imp = xgb.importance(col_headings,model=model)#,data=data_train,label=y_train)
 #head(imp)
